@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fTE-7m-cOg">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Countries-->
+        <scene sceneID="dXe-ya-ku7">
+            <objects>
+                <tableViewController id="w0z-vq-psH" customClass="TableViewController" customModule="List_of_Countries" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dbl-Z7-5Sw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCell" textLabel="wuD-9i-gaF" style="IBUITableViewCellStyleDefault" id="NPp-88-nZi" customClass="CountryCell" customModule="List_of_Countries" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NPp-88-nZi" id="5Tf-UI-0Y2">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wuD-9i-gaF">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="QXY-Ud-afx" kind="show" identifier="showCountrySegue" id="Ga9-bP-OSH"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="w0z-vq-psH" id="TBM-Lp-EYV"/>
+                            <outlet property="delegate" destination="w0z-vq-psH" id="u32-xL-2lK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Countries" id="fI1-UV-j35">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="RZw-ja-soO">
+                            <connections>
+                                <action selector="setEditingMode:" destination="w0z-vq-psH" id="vnu-2Q-hbE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ef6-aK-guw">
+                            <connections>
+                                <segue destination="LFp-yn-PJf" kind="presentation" id="sT4-Pw-TMX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="editButtonLabel" destination="RZw-ja-soO" id="ovq-BI-yfZ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1PE-mf-pnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1006" y="145"/>
+        </scene>
+        <!--Add Country-->
+        <scene sceneID="K3i-hT-oh3">
+            <objects>
+                <viewController id="zPy-Hb-HFX" customClass="AddCountryViewController" customModule="List_of_Countries" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hLL-1t-6fJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QdN-rQ-LwR" userLabel="Add Country">
+                                <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A5C-Hs-jYI">
+                                <rect key="frame" x="20" y="112" width="374" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bvp-aX-maa"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For multiple items use a comma to separate the items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bU3-PZ-eIG">
+                                <rect key="frame" x="34" y="160" width="346" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bU3-PZ-eIG" firstAttribute="leading" secondItem="FkY-Uk-dWQ" secondAttribute="leading" constant="34" id="6K3-ce-LdT"/>
+                            <constraint firstItem="FkY-Uk-dWQ" firstAttribute="trailing" secondItem="bU3-PZ-eIG" secondAttribute="trailing" constant="34" id="ARL-RP-gfc"/>
+                            <constraint firstItem="A5C-Hs-jYI" firstAttribute="leading" secondItem="FkY-Uk-dWQ" secondAttribute="leading" constant="20" id="S7Z-ls-Pcm"/>
+                            <constraint firstItem="A5C-Hs-jYI" firstAttribute="top" secondItem="FkY-Uk-dWQ" secondAttribute="top" constant="24" id="TT2-jP-alV"/>
+                            <constraint firstItem="bU3-PZ-eIG" firstAttribute="top" secondItem="A5C-Hs-jYI" secondAttribute="bottom" constant="18" id="XWz-qx-Bbj"/>
+                            <constraint firstItem="FkY-Uk-dWQ" firstAttribute="trailing" secondItem="A5C-Hs-jYI" secondAttribute="trailing" constant="20" id="fZ3-vC-WBP"/>
+                            <constraint firstItem="FkY-Uk-dWQ" firstAttribute="bottom" secondItem="A5C-Hs-jYI" secondAttribute="bottom" constant="720" id="u5f-O7-wNK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FkY-Uk-dWQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Country" id="iCp-HY-tfB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="T2a-1u-sS7">
+                            <connections>
+                                <action selector="dismissView:" destination="zPy-Hb-HFX" id="96x-5U-n6T"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="done" id="sjw-ot-haB">
+                            <connections>
+                                <action selector="doneAddingCountry:" destination="zPy-Hb-HFX" id="ten-cw-Uv1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="addCountryTextfield" destination="A5C-Hs-jYI" id="K4w-IK-3fw"/>
+                        <outlet property="doneAddingCountryButton" destination="sjw-ot-haB" id="c29-Vg-qd0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="89A-r7-2CV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1887" y="967"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="4JB-pF-m0q">
+            <objects>
+                <viewController id="QXY-Ud-afx" customClass="DetailViewController" customModule="List_of_Countries" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0cQ-aA-pXo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-TQ-JH1">
+                                <rect key="frame" x="42" y="123" width="330" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Luv-8i-Bb1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g8s-TQ-JH1" firstAttribute="leading" secondItem="wF8-6j-eVp" secondAttribute="leading" constant="42" id="GZE-XX-Liw"/>
+                            <constraint firstItem="wF8-6j-eVp" firstAttribute="bottom" secondItem="g8s-TQ-JH1" secondAttribute="bottom" constant="715" id="duG-Ce-NeJ"/>
+                            <constraint firstItem="wF8-6j-eVp" firstAttribute="trailing" secondItem="g8s-TQ-JH1" secondAttribute="trailing" constant="42" id="zSP-5h-cfu"/>
+                            <constraint firstItem="g8s-TQ-JH1" firstAttribute="top" secondItem="wF8-6j-eVp" secondAttribute="top" constant="35" id="zal-GE-fEe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wF8-6j-eVp"/>
+                    </view>
+                    <connections>
+                        <outlet property="countryNameLabel" destination="g8s-TQ-JH1" id="MqL-OW-pk9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W9Y-k8-dxV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1887" y="145"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="B5q-BW-dbT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fTE-7m-cOg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8IQ-nL-ytc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="w0z-vq-psH" kind="relationship" relationship="rootViewController" id="Yll-pb-chC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dqc-tp-90p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="145"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="I1c-1g-qQC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LFp-yn-PJf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LIn-KA-nYr">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zPy-Hb-HFX" kind="relationship" relationship="rootViewController" id="b6d-Ag-r3q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ms4-Ru-6It" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1006" y="967"/>
+        </scene>
+    </scenes>
+</document>
