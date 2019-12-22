@@ -7,33 +7,59 @@
 //
 
 import UIKit
+import CoreData
+import Kingfisher
 
 class CountryFlagsCollectionViewController: UICollectionViewController {
-
     @IBOutlet weak var doneAddingCountries: UIBarButtonItem!
     var selectedCountries: [Country] = []
+    var fetchedResultsController: NSFetchedResultsController<Country>
+    let context = CoreDataStack.shared.mainManagedObjectContext
 
+    
+    required init?(coder aDecoder: NSCoder) {
+        let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchedResultsController = NSFetchedResultsController<Country>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainManagedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
-        collectionView.allowsMultipleSelection = true
+        do {
+           try fetchedResultsController.performFetch()
+        } catch let error {
+            assert(false, error.localizedDescription)
+        }
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return Country.countryFlagCount
+        if let sectionInfo: AnyObject = fetchedResultsController.sections?[section] {
+            return sectionInfo.numberOfObjects
+        }
+        return 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "countryFlagCell", for: indexPath) as? CountryFlagCell
             else { preconditionFailure("no cell") }
-        let nameWithUnderscores = Country.countries[indexPath.item].name.replacingOccurrences(of: " ", with: "_")
-        cell.countryFlagImage.image = UIImage(named: "\(nameWithUnderscores)")
-        cell.countryNameLabel.text = Country.countries[indexPath.item].name
-
+        
+        let country = fetchedResultsController.object(at: IndexPath(row: indexPath.row, section: 0))
+        let alpha2Code = country.alpha2Code
+        
+        guard
+            let url = URL(string: "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/\(alpha2Code.lowercased()).png")
+            else { fatalError() }
+        
+        cell.countryFlagImage.kf.setImage(with: url)
+        cell.countryNameLabel.text = country.name
+        
         return cell
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedCountries.append(Country.countries[indexPath.item])
+         let country = fetchedResultsController.object(at: IndexPath(row: indexPath.row, section: 0))
+        selectedCountries.append(country)
         guard
             let cell = collectionView.cellForItem(at: indexPath)
             else { return }
@@ -41,25 +67,39 @@ class CountryFlagsCollectionViewController: UICollectionViewController {
             cell.backgroundColor = UIColor(red: 98.0 / 255.0, green: 98.0 / 255.0, blue: 98.0 / 255.0, alpha: 0.2)
         }
         doneAddingCountries.isEnabled = true
+        showAlert()
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        selectedCountries.remove(at: indexPath.item)
+        selectedCountries.remove(at: 0)
     
         guard
             let cell = collectionView.cellForItem(at: indexPath)
             else { return }
         cell.backgroundColor = UIColor.clear
     }
-
+    
     @IBAction func addCountries(_ sender: UIBarButtonItem) {
-        Country.listOfCountries.append(contentsOf: selectedCountries)
+        SingleCountry.listOfCountries.append(selectedCountries[0])
         dismiss(animated: true, completion: nil)
         selectedCountries.removeAll()
     }
-
+    
     @IBAction func dismissView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reallyWantToGoAction = UIAlertAction(title: "Really want to go", style: .default, handler: nil)
+        let wantToGoAction = UIAlertAction(title: "Want to go", style: .default, handler: nil)
+        let maybeWantToGoAction = UIAlertAction(title: "Maybe want to go", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        alert.addAction(reallyWantToGoAction)
+        alert.addAction(wantToGoAction)
+        alert.addAction(maybeWantToGoAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

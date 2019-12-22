@@ -14,6 +14,7 @@ struct ServerCountry: Codable {
     let latitudeLongitude: [Double]
     let population: Int
     let capital: String
+    let alpha2Code: String
     // This is a computed value that converts the values in the latitudeLongitude variable into a more readable format
     var coordinates: CLLocationCoordinate2D? {
         if latitudeLongitude.count != 2 { return nil }
@@ -25,6 +26,7 @@ struct ServerCountry: Codable {
         case latitudeLongitude = "latlng"
         case population = "population"
         case capital = "capital"
+        case alpha2Code = "alpha2Code"
     }
 }
 
@@ -41,6 +43,19 @@ struct CountryServerNetworking {
         }
         task.resume()
     }
+    
+    static func getAllAPIData( completion: @escaping (Data) -> Void) {
+        let endPoint = "https://restcountries.eu/rest/v2/all"
+        guard
+            let url = URL(string: endPoint)
+            else { return }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { (data, response, error) in
+            completion(data!)
+        }
+        task.resume()
+    }
+    
     // This function loads the data that it gets from the API call and decodes it into a readable format with a completion handler 
     static func loadCountryData(_ name: String, completion: @escaping (ServerCountry) -> Void) {
         getAPIData(name) { resultData in
@@ -48,6 +63,19 @@ struct CountryServerNetworking {
                 let decoder = JSONDecoder()
                 let decodedResult = try decoder.decode([ServerCountry].self, from: resultData)
                 completion(decodedResult[0])
+            } catch {
+                print("failed")
+            }
+        }
+    }
+    
+    static func loadAllCountryData(completion: @escaping ([ServerCountry]) -> Void) {
+        getAllAPIData { resultData in
+            do {
+                let decoder = JSONDecoder()
+                let decodedResult = try decoder.decode([ServerCountry].self, from: resultData)
+                Country.saveCountries(decodedResult)
+                completion(decodedResult)
             } catch {
                 print("failed")
             }

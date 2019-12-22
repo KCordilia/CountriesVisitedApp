@@ -25,7 +25,6 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = countryName
-//        Country.createCountryCatalogue()
         
         guard
             let countryName = countryName?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)

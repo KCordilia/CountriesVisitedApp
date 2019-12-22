@@ -8,221 +8,28 @@
 
 import MapKit
 
-struct Country {
+struct SingleCountry {
     let name: String
+    let alpha2Code: String
     
     static var countryCount: Int {
-        return Country.listOfCountries.count
+        return SingleCountry.listOfCountries.count
     }
     
     static var sectionHeadersCount: Int {
-        return Country.sectionHeaders.count
+        return SingleCountry.sectionHeaders.count
     }
     
     static var countryFlagCount: Int {
-        return Country.countryCatalogue.count
-    }
-    
-    static var countries: [Country] {
-        return Country.countryCatalogue
+        return SingleCountry.countryCatalogue.count
     }
     
     static let sectionHeaders = ["Visited", "Want to visit"]
     
     static var listOfCountries: [Country] = []
+
     
-    static func createCountryCatalogue() {
-        let splitCountries = CountryNames.allCountries.split(separator: " ")
-        let mappedCountries = splitCountries
-        print(mappedCountries)
-    }
+    static var countryCatalogue: [SingleCountry] = []
     
-    private static var countryCatalogue = [
-        Country(name:"Afghanistan"),
-        Country(name:"Albania"),
-        Country(name:"Algeria"),
-        Country(name:"Andorra"),
-        Country(name:"Angola"),
-        Country(name:"Anguilla"),
-        Country(name:"Antigua and Barbuda"),
-        Country(name:"Argentina"),
-        Country(name:"Armenia"),
-        Country(name:"Aruba"),
-        Country(name:"Australia"),
-        Country(name:"Austria"),
-        Country(name:"Azerbaijan"),
-        Country(name:"Bahamas"),
-        Country(name:"Bahrain"),
-        Country(name:"Bangladesh"),
-        Country(name:"Barbados"),
-        Country(name:"Belarus"),
-        Country(name:"Belgium"),
-        Country(name:"Belize"),
-        Country(name:"Benin"),
-        Country(name:"Bermuda"),
-        Country(name:"Bhutan"),
-        Country(name:"Bolivia"),
-        Country(name:"Bosnia"),
-        Country(name:"Botswana"),
-        Country(name:"Brazil"),
-        Country(name:"British Virgin Islands"),
-        Country(name:"Brunei"),
-        Country(name:"Bulgaria"),
-        Country(name:"Burkina Faso"),
-        Country(name:"Burundi"),
-        Country(name:"Cambodia"),
-        Country(name:"Cameroon"),
-        Country(name:"Cape Verde"),
-        Country(name:"Cayman Islands"),
-        Country(name:"Chad"),
-        Country(name:"Chile"),
-        Country(name:"China"),
-        Country(name:"Colombia"),
-        Country(name:"Cook Islands"),
-        Country(name:"Costa Rica"),
-        Country(name:"Cote D'ivoire"),
-        Country(name:"Croatia"),
-        Country(name:"Cuba"),
-        Country(name:"Cyprus"),
-        Country(name:"Czech Republic"),
-        Country(name:"Denmark"),
-        Country(name:"Djibouti"),
-        Country(name:"Dominica"),
-        Country(name:"Dominican Republic"),
-        Country(name:"Ecuador"),
-        Country(name:"Egypt"),
-        Country(name:"El Salvador"),
-        Country(name:"Equatorial Guinea"),
-        Country(name:"Estonia"),
-        Country(name:"Ethiopia"),
-        Country(name:"Falkland Islands"),
-        Country(name:"Faroe Islands"),
-        Country(name:"Fiji"),
-        Country(name:"Finland"),
-        Country(name:"France"),
-        Country(name:"French Polynesia"),
-        Country(name:"Gabon"),
-        Country(name:"Gambia"),
-        Country(name:"Georgia"),
-        Country(name:"Germany"),
-        Country(name:"Ghana"),
-        Country(name:"Gibraltar"),
-        Country(name:"Greece"),
-        Country(name:"Greenland"),
-        Country(name:"Grenada"),
-        Country(name:"Guam"),
-        Country(name:"Guatemala"),
-        Country(name:"Guinea"),
-        Country(name:"Guinea Bissau"),
-        Country(name:"Guyana"),
-        Country(name:"Haiti"),
-        Country(name:"Honduras"),
-        Country(name:"Hong Kong"),
-        Country(name:"Hungary"),
-        Country(name:"Iceland"),
-        Country(name:"India"),
-        Country(name:"Indonesia"),
-        Country(name:"Iran"),
-        Country(name:"Iraq"),
-        Country(name:"Ireland"),
-        Country(name:"Israel"),
-        Country(name:"Italy"),
-        Country(name:"Jamaica"),
-        Country(name:"Japan"),
-        Country(name:"Jordan"),
-        Country(name:"Kazakhstan"),
-        Country(name:"Kenya"),
-        Country(name:"Kuwait"),
-        Country(name:"Laos"),
-        Country(name:"Latvia"),
-        Country(name:"Lebanon"),
-        Country(name:"Lesotho"),
-        Country(name:"Liberia"),
-        Country(name:"Libya"),
-        Country(name:"Liechtenstein"),
-        Country(name:"Lithuania"),
-        Country(name:"Luxembourg"),
-        Country(name:"Macao"),
-        Country(name:"Macedonia"),
-        Country(name:"Madagascar"),
-        Country(name:"Malawi"),
-        Country(name:"Malaysia"),
-        Country(name:"Maldives"),
-        Country(name:"Mali"),
-        Country(name:"Malta"),
-        Country(name:"Mauritania"),
-        Country(name:"Mauritius"),
-        Country(name:"Mexico"),
-        Country(name:"Moldova"),
-        Country(name:"Monaco"),
-        Country(name:"Mongolia"),
-        Country(name:"Montserrat"),
-        Country(name:"Morocco"),
-        Country(name:"Mozambique"),
-        Country(name:"Namibia"),
-        Country(name:"Nepal"),
-        Country(name:"Netherlands"),
-        Country(name:"Netherlands Antilles"),
-        Country(name:"New Zealand"),
-        Country(name:"Nicaragua"),
-        Country(name:"Niger"),
-        Country(name:"Nigeria"),
-        Country(name:"Norway"),
-        Country(name:"Oman"),
-        Country(name:"Pakistan"),
-        Country(name:"Panama"),
-        Country(name:"Papua New Guinea"),
-        Country(name:"Paraguay"),
-        Country(name:"Peru"),
-        Country(name:"Philippines"),
-        Country(name:"Poland"),
-        Country(name:"Portugal"),
-        Country(name:"Puerto Rico"),
-        Country(name:"Qatar"),
-        Country(name:"Romania"),
-        Country(name:"Russia"),
-        Country(name:"Rwanda"),
-        Country(name:"Saint Pierre Miquelon"),
-        Country(name:"Samoa"),
-        Country(name:"San Marino"),
-        Country(name:"Saudi Arabia"),
-        Country(name:"Senegal"),
-        Country(name:"Seychelles"),
-        Country(name:"Sierra Leone"),
-        Country(name:"Singapore"),
-        Country(name:"Slovakia"),
-        Country(name:"Slovenia"),
-        Country(name:"South Africa"),
-        Country(name:"South Korea"),
-        Country(name:"Spain"),
-        Country(name:"Sri Lanka"),
-        Country(name:"Sudan"),
-        Country(name:"Suriname"),
-        Country(name:"Swaziland"),
-        Country(name:"Sweden"),
-        Country(name:"Switzerland"),
-        Country(name:"Syria"),
-        Country(name:"Taiwan"),
-        Country(name:"Tajikistan"),
-        Country(name:"Tanzania"),
-        Country(name:"Thailand"),
-        Country(name:"Togo"),
-        Country(name:"Tonga"),
-        Country(name:"Trinidad And Tobago"),
-        Country(name:"Tunisia"),
-        Country(name:"Turkey"),
-        Country(name:"Turkmenistan"),
-        Country(name:"Turks and Caicos"),
-        Country(name:"Uganda"),
-        Country(name:"Ukraine"),
-        Country(name:"United Kingdom"),
-        Country(name:"Uruguay"),
-        Country(name:"Uzbekistan"),
-        Country(name:"Venezuela"),
-        Country(name:"Vietnam"),
-        Country(name:"Yemen"),
-        Country(name:"Zambia"),
-        Country(name:"Zimbabwe")
-    ];
     
 }
